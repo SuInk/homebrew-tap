@@ -12,8 +12,7 @@ cask "sleepcat" do
   app "SleepCat.app"
 
   caveats <<~EOS
-    SleepCat is ad-hoc signed (not notarized). If macOS blocks it, either
-    install with --no-quarantine, or run:
+    SleepCat is ad-hoc signed (not notarized). If macOS blocks it, run:
       xattr -dr com.apple.quarantine /Applications/SleepCat.app
 
     The optional lid-close mode installs a scoped sudoers rule at
