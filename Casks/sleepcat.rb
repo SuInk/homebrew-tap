@@ -15,12 +15,15 @@ cask "sleepcat" do
     SleepCat is ad-hoc signed (not notarized). If macOS blocks it, run:
       xattr -dr com.apple.quarantine /Applications/SleepCat.app
 
-    The optional lid-close mode installs a scoped sudoers rule at
-    /etc/sudoers.d/sleepcat (removable from the app's menu).
+    Lid-close mode installs a scoped sudoers rule at /etc/sudoers.d/sleepcat
+    on first use. Remove it with `brew uninstall --zap --cask sleepcat`.
   EOS
 
-  zap trash: [
-    "~/Library/Logs/SleepCat.log",
-    "~/Library/Preferences/com.suink.sleepcat.plist",
-  ]
+  # zap rather than uninstall: uninstall also runs on every upgrade, which
+  # would force re-authorization after each update.
+  zap delete: "/etc/sudoers.d/sleepcat",
+      trash:  [
+        "~/Library/Logs/SleepCat.log",
+        "~/Library/Preferences/com.suink.sleepcat.plist",
+      ]
 end
