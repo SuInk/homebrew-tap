@@ -7,16 +7,23 @@ cask "sleepcat" do
   desc "Menu bar cat that keeps your Mac awake, even with the lid closed"
   homepage "https://github.com/SuInk/sleepcat"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "SleepCat.app"
 
-  caveats <<~EOS
-    SleepCat is ad-hoc signed (not notarized). If macOS blocks it, run:
-      xattr -dr com.apple.quarantine /Applications/SleepCat.app
+  # The app is ad-hoc signed, not notarized, so Gatekeeper would block the first
+  # launch of the quarantined download. Clearing it here saves users a manual step.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/SleepCat.app"]
+  end
 
+  caveats <<~EOS
     Lid-close mode installs a scoped sudoers rule at /etc/sudoers.d/sleepcat
     on first use. Remove it with `brew uninstall --zap --cask sleepcat`.
+
+    To pick up new versions with a plain `brew upgrade`, trust the tap once:
+      brew trust suink/tap
   EOS
 
   # zap rather than uninstall: uninstall also runs on every upgrade, which
