@@ -31,6 +31,7 @@ cask "sleepcat" do
   zap delete: "/etc/sudoers.d/sleepcat",
       trash:  [
         "~/Library/Logs/SleepCat.log",
+        "~/Library/Preferences/cn.suink.sleepcat.plist",
         "~/Library/Preferences/com.earlyso.sleepcat.plist",
         "~/Library/Preferences/com.suink.sleepcat.plist",
       ]
