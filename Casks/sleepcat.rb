@@ -4,7 +4,7 @@ cask "sleepcat" do
 
   url "https://github.com/SuInk/sleepcat/releases/download/v#{version}/SleepCat-#{version}.zip"
   name "SleepCat"
-  desc "Menu bar cat that keeps your Mac awake, even with the lid closed"
+  desc "Menu bar cat that keeps the computer awake, even with the lid closed"
   homepage "https://github.com/SuInk/sleepcat"
 
   depends_on macos: :ventura
@@ -20,14 +20,6 @@ cask "sleepcat" do
         writable_base:  :appdir
   end
 
-  caveats <<~EOS
-    Lid-close mode installs a scoped sudoers rule at /etc/sudoers.d/sleepcat
-    on first use. Remove it with `brew uninstall --zap --cask sleepcat`.
-
-    To pick up new versions with a plain `brew upgrade`, trust the tap once:
-      brew trust suink/tap
-  EOS
-
   # zap rather than uninstall: uninstall also runs on every upgrade, which
   # would force re-authorization after each update.
   zap delete: "/etc/sudoers.d/sleepcat",
@@ -37,4 +29,12 @@ cask "sleepcat" do
         "~/Library/Preferences/com.earlyso.sleepcat.plist",
         "~/Library/Preferences/com.suink.sleepcat.plist",
       ]
+
+  caveats <<~EOS
+    Lid-close mode installs a scoped sudoers rule at /etc/sudoers.d/sleepcat
+    on first use. Remove it with `brew uninstall --zap --cask sleepcat`.
+
+    To pick up new versions with a plain `brew upgrade`, trust the tap once:
+      brew trust suink/tap
+  EOS
 end
