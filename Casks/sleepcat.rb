@@ -13,9 +13,11 @@ cask "sleepcat" do
 
   # The app is ad-hoc signed, not notarized, so Gatekeeper would block the first
   # launch of the quarantined download. Clearing it here saves users a manual step.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/SleepCat.app"]
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:           ["-dr", "com.apple.quarantine", "{{appdir}}/SleepCat.app"],
+        writable_paths: ["SleepCat.app"],
+        writable_base:  :appdir
   end
 
   caveats <<~EOS
