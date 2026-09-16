@@ -1,6 +1,6 @@
 cask "sleepcat" do
-  version "1.6.5"
-  sha256 "a01f56f1fdfc8bcbb38c859c32a3eb75d3305b3feea0c20897db1918a028a835"
+  version "1.6.6"
+  sha256 "81500bd30839fea5c385a840129e694e383e876d676021e18261952dbdf6876f"
 
   url "https://github.com/SuInk/sleepcat/releases/download/v#{version}/SleepCat-#{version}.zip"
   name "SleepCat"
