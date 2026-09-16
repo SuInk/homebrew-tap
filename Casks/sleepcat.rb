@@ -24,6 +24,7 @@ cask "sleepcat" do
   # would force re-authorization after each update.
   zap delete: "/etc/sudoers.d/sleepcat",
       trash:  [
+        "~/Library/Application Support/SleepCat",
         "~/Library/Logs/SleepCat.log",
         "~/Library/Preferences/cn.suink.sleepcat.plist",
         "~/Library/Preferences/com.earlyso.sleepcat.plist",
